@@ -1,0 +1,16 @@
+spring:
+  config:
+    activate:
+      on-profile: "qa"
+
+build:
+  version: "2.0"
+
+accounts:
+  message: "Welcome to EasyBank cards related QA APIs "
+  contactDetails:
+    name: "Kirill Grigoriev - QA Lead"
+    email: "kirill.grigoriev@easybank.com"
+  onCallSupport:
+    - (310) 875-4367
+    - (201) 236-1267
