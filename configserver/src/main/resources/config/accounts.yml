@@ -1,0 +1,11 @@
+build:
+  version: "3.0"
+
+accounts:
+  message: "Welcome to EasyBank accounts related local APIs "
+  contactDetails:
+    name: "Sergey Novikov - Developer"
+    email: "sergey.novikov@easybank.com"
+  onCallSupport:
+    - (452) 456-2176
+    - (546) 764-8934

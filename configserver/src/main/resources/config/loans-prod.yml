@@ -1,13 +1,8 @@
-spring:
-  config:
-    activate:
-      on-profile: "prod"
-
 build:
   version: "1.0"
 
 loans:
-  message: "Welcome to EasyBank cards related prod APIs "
+  message: "Welcome to EasyBank loans related prod APIs "
   contactDetails:
     name: "Andrey Kolosov - Product Owner"
     email: "andrey.kolosov@easybank.com"

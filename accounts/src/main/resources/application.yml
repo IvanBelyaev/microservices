@@ -2,7 +2,9 @@ server:
   port: 8080
 spring:
   application:
-    name: accounts
+    name: "accounts"
+  profiles:
+    active: "prod"
   datasource:
     url: jdbc:h2:mem:testdb
     driver-class-name: org.h2.Driver
@@ -17,21 +19,4 @@ spring:
       ddl-auto: update
     show-sql: true
   config:
-    import:
-      - "application_qa.yml"
-      - "application_prod.yml"
-  profiles:
-    active:
-      - "qa"
-
-build:
-  version: "3.0"
-
-accounts:
-  message: "Welcome to EasyBank loans related local APIs "
-  contactDetails:
-    name: "Sergey Novikov - Developer"
-    email: "sergey.novikov@easybank.com"
-  onCallSupport:
-    - (452) 456-2176
-    - (546) 764-8934
+    import: "optional:configserver:http://localhost:8071/"

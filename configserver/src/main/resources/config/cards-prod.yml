@@ -1,16 +1,11 @@
-spring:
-  config:
-    activate:
-      on-profile: "prod"
-
 build:
   version: "1.0"
 
-accounts:
+cards:
   message: "Welcome to EasyBank cards related prod APIs "
   contactDetails:
-    name: "Anna Krasnova - Product Owner"
-    email: "anna.krasnova@easybank.com"
+    name: "Elena Sidorova - Product Owner"
+    email: "elena.sidorova@easybank.com"
   onCallSupport:
     - (617) 432-2356
     - (936) 564-8721

@@ -1,0 +1,11 @@
+build:
+  version: "1.0"
+
+accounts:
+  message: "Welcome to EasyBank accounts related prod APIs "
+  contactDetails:
+    name: "Anna Krasnova - Product Owner"
+    email: "anna.krasnova@easybank.com"
+  onCallSupport:
+    - (617) 432-2356
+    - (936) 564-8721
