@@ -56,9 +56,8 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -131,7 +130,7 @@
 				<version>3.4.6</version>
 				<configuration>
 					<to>
-						<image>belyaev84/${project.artifactId}:0.2</image>
+						<image>belyaev84/${project.artifactId}:0.7</image>
 					</to>
 				</configuration>
 			</plugin>

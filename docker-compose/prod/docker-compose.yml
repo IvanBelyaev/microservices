@@ -1,4 +1,34 @@
 services:
+  accountsdb:
+    container_name: accountsdb
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: accountsdb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+  loansdb:
+    container_name: loansdb
+    ports:
+      - "5434:5432"
+    environment:
+      POSTGRES_DB: loansdb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
+  cardsdb:
+    container_name: cardsdb
+    ports:
+      - "5435:5432"
+    environment:
+      POSTGRES_DB: cardsdb
+    extends:
+      file: common-config.yml
+      service: microservice-db-config
+
   rabbit:
     image: rabbitmq:4-management
     hostname: rabbitmq
@@ -16,7 +46,7 @@ services:
       service: network-deploy-service
 
   configserver:
-    image: "belyaev84/configserver:0.2"
+    image: "belyaev84/configserver:0.7"
     container_name: confiserver-ms
     ports:
       - "8071:8071"
@@ -34,36 +64,48 @@ services:
       service: microservice-base-config
 
   accounts:
-    image: "belyaev84/accounts:0.2"
+    image: "belyaev84/accounts:0.7"
     container_name: accounts-ms
     ports:
       - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://accountsdb:5432/accountsdb"
     depends_on:
       configserver:
+        condition: service_healthy
+      accountsdb:
         condition: service_healthy
     extends:
       file: common-config.yml
       service: microservice-configserver-config
 
   loans:
-    image: "belyaev84/loans:0.2"
+    image: "belyaev84/loans:0.7"
     container_name: loans-ms
     ports:
       - "8090:8090"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://loansdb:5432/loansdb"
     depends_on:
       configserver:
+        condition: service_healthy
+      loansdb:
         condition: service_healthy
     extends:
       file: common-config.yml
       service: microservice-configserver-config
 
   cards:
-    image: "belyaev84/cards:0.2"
+    image: "belyaev84/cards:0.7"
     container_name: cards-ms
     ports:
       - "9000:9000"
+    environment:
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://cardsdb:5432/cardsdb"
     depends_on:
       configserver:
+        condition: service_healthy
+      cardsdb:
         condition: service_healthy
     extends:
       file: common-config.yml
