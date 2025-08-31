@@ -1,7 +1,6 @@
 package com.example.easybank.accounts.controller;
 
 import com.example.easybank.accounts.dto.CustomerDetailsDto;
-import com.example.easybank.accounts.dto.CustomerDto;
 import com.example.easybank.accounts.dto.ErrorResponseDto;
 import com.example.easybank.accounts.service.CustomerService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.Valid;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
