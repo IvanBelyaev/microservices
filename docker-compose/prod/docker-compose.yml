@@ -5,6 +5,8 @@ services:
       - "5433:5432"
     environment:
       POSTGRES_DB: accountsdb
+    volumes:
+      - accounts-data:/var/lib/postgresql/data
     extends:
       file: common-config.yml
       service: microservice-db-config
@@ -15,6 +17,8 @@ services:
       - "5434:5432"
     environment:
       POSTGRES_DB: loansdb
+    volumes:
+      - loans-data:/var/lib/postgresql/data
     extends:
       file: common-config.yml
       service: microservice-db-config
@@ -25,6 +29,8 @@ services:
       - "5435:5432"
     environment:
       POSTGRES_DB: cardsdb
+    volumes:
+      - cards-data:/var/lib/postgresql/data
     extends:
       file: common-config.yml
       service: microservice-db-config
@@ -132,3 +138,8 @@ services:
 networks:
   easybank:
     driver: "bridge"
+
+volumes:
+  accounts-data:
+  cards-data:
+  loans-data:
