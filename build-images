@@ -1,0 +1,11 @@
+cd accounts && mvn clean compile jib:dockerBuild
+
+cd ../loans && mvn clean compile jib:dockerBuild
+
+cd ../cards && mvn clean compile jib:dockerBuild
+
+cd ../configserver && mvn clean compile jib:dockerBuild
+
+cd ../eurekaserver && mvn clean compile jib:dockerBuild
+
+cd ../gatewayserver && mvn clean compile jib:dockerBuild
