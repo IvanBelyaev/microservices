@@ -5,6 +5,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
@@ -15,5 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public interface LoansFeignClient {
 
   @GetMapping(value = "/api/v1/fetch", consumes = MediaType.APPLICATION_JSON_VALUE)
-  ResponseEntity<LoanDto> fetchLoanDetails(@RequestParam String mobileNumber);
+  ResponseEntity<LoanDto> fetchLoanDetails(@RequestHeader("easyBank-correlation-id") String correlationId,
+                                           @RequestParam String mobileNumber);
 }
