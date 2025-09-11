@@ -39,10 +39,14 @@ public class CustomerService {
     customerDetailsDto.setAccount(AccountMapper.mapToAccountDto(account, new AccountDto()));
 
     ResponseEntity<LoanDto> loanDtoResponseEntity = loansFeignClient.fetchLoanDetails(correlationId, mobileNumber);
-    customerDetailsDto.setLoan(loanDtoResponseEntity.getBody());
+    if (loanDtoResponseEntity != null) {
+      customerDetailsDto.setLoan(loanDtoResponseEntity.getBody());
+    }
 
     ResponseEntity<CardDto> cardDtoResponseEntity = cardsFeignClient.fetchCardDetails(correlationId, mobileNumber);
-    customerDetailsDto.setCard(cardDtoResponseEntity.getBody());
+    if (cardDtoResponseEntity != null) {
+      customerDetailsDto.setCard(cardDtoResponseEntity.getBody());
+    }
 
     return customerDetailsDto;
   }
