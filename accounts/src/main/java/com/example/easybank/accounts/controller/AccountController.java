@@ -6,6 +6,7 @@ import com.example.easybank.accounts.dto.CustomerDto;
 import com.example.easybank.accounts.dto.ErrorResponseDto;
 import com.example.easybank.accounts.dto.ResponseDto;
 import com.example.easybank.accounts.service.AccountService;
+import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -33,6 +35,7 @@ import static com.example.easybank.accounts.constants.AccountConstants.STATUS_20
     name = "CRUD REST APIs for Accounts in EasyBank",
     description = "CRUD REST APIs in EasyBank to CREATE, UPDATE, FETCH AND DELETE accounts details"
 )
+@Slf4j
 @RestController
 @RequestMapping(path = "/api/v1", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
@@ -224,10 +227,19 @@ public class AccountController {
   }
   )
   @GetMapping("/build-info")
+  @Retry(name = "getBuildInfo", fallbackMethod = "getBuildInfoFallback")
   public ResponseEntity<String> getBuildInfo() {
+    log.debug("getBuildInfo() method invoked");
     return ResponseEntity
         .status(HttpStatus.OK)
         .body(buildVersion);
+  }
+
+  public ResponseEntity<String> getBuildInfoFallback(Throwable throwable) {
+    log.debug("getBuildInfoFallback() method invoked");
+    return ResponseEntity
+        .status(HttpStatus.OK)
+        .body("111");
   }
 
   @Operation(
