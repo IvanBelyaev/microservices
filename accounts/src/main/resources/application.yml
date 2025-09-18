@@ -82,3 +82,9 @@ resilience4j:
         exponentialBackoffMultiplier: 2
         ignoreExceptions:
           - java.lang.NullPointerException
+  ratelimiter:
+    configs:
+      default:
+        timeout-duration: 1000
+        limit-refresh-period: 5000
+        limit-for-period: 1

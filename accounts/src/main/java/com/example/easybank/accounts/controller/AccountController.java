@@ -6,6 +6,7 @@ import com.example.easybank.accounts.dto.CustomerDto;
 import com.example.easybank.accounts.dto.ErrorResponseDto;
 import com.example.easybank.accounts.dto.ResponseDto;
 import com.example.easybank.accounts.service.AccountService;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import io.github.resilience4j.retry.annotation.Retry;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -260,11 +261,18 @@ public class AccountController {
       )
   }
   )
+  @RateLimiter(name = "getJavaVersion", fallbackMethod = "getJavaVersionFallback")
   @GetMapping("/java-version")
   public ResponseEntity<String> getJavaVersion() {
     return ResponseEntity
         .status(HttpStatus.OK)
         .body(environment.getProperty("JAVA_HOME"));
+  }
+
+  public ResponseEntity<String> getJavaVersionFallback(Throwable throwable) {
+    return ResponseEntity
+        .status(HttpStatus.OK)
+        .body("Java 25");
   }
 
   @Operation(
