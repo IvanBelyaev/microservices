@@ -134,7 +134,7 @@
 				<version>3.4.6</version>
 				<configuration>
 					<to>
-						<image>belyaev84/${project.artifactId}:0.9</image>
+						<image>belyaev84/${project.artifactId}:0.10</image>
 					</to>
 				</configuration>
 			</plugin>
